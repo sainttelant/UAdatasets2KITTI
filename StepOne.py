@@ -88,19 +88,23 @@ def ConvertVOCXml(file_path="", file_name=""):
 
                         if (target_child.tag == "attribute"):
                             name = doc.createElement('name')
-                            speed = doc.createElement('speed')
+                            #speed = doc.createElement('speed')
+                            pose = doc.createElement("pose")
                             truncated = doc.createElement('truncated')
                             difficult = doc.createElement('difficult')
                             #从xml文件里读取车辆type
                             vehicle_type = target_child.attrib["vehicle_type"]
-                            speed_value = target_child.attrib["speed"]
+                            #speed_value = target_child.attrib["speed"]
+
                             name.appendChild(doc.createTextNode(vehicle_type))
-                            speed.appendChild(doc.createTextNode(str(speed_value)))  # 随意指定
+                            #speed.appendChild(doc.createTextNode(str(speed_value)))  # 随意指定
+                            pose.appendChild(doc.createTextNode("left"))
                             truncated.appendChild(doc.createTextNode("0"))  # 随意指定
                             difficult.appendChild(doc.createTextNode("0"))  # 随意指定
 
                             object.appendChild(name)
-                            object.appendChild(speed)
+                            #object.appendChild(speed)
+                            object.appendChild(pose)
                             object.appendChild(truncated)
                             object.appendChild(difficult)
 
