@@ -211,5 +211,5 @@ if (__name__ == "__main__"):
     print("Time taken : {0} seconds".format(seconds))
     print(total_num)
     log.write(str(total_num) + "\n")
-    visualization_image("../../DataSetTest/RawIMg/MVI_20012/img00162.jpg", "Annotations/MVI_20012__img00162.xml")
+    visualization_image("../DataSetTest/RawIMg/MVI_20012/img00162.jpg", "Annotations/MVI_20012__img00162.xml")
 
