@@ -50,14 +50,14 @@ if __name__ == "__main__":
                 with open(item, 'r') as r_tdf:
                     for each_line in r_tdf:
                         labeldata = each_line.strip().split(' ')
-                        if labeldata[0] =="Car":
-                            labeldata[0] = labeldata[0].replace(labeldata[0],'car')
-                        if labeldata[0] == 'Pedestrian' or labeldata[0] == "pedestrian": # 合并行人类
-                            labeldata[0] = labeldata[0].replace(labeldata[0],'person')
-                        if labeldata[0] == 'Cyclist' or labeldata[0]=="cyclist" : # 忽略Dontcare类
-                            labeldata[0] = labeldata[0].replace(labeldata[0],'bicycle')
-                        if labeldata[0] == 'Misc': # 忽略Misc类
-                            continue
+                        if labeldata[0] =="car":
+                            labeldata[0] = labeldata[0].replace(labeldata[0],'Car')
+                        if labeldata[0] == 'person': # 合并行人类
+                            labeldata[0] = labeldata[0].replace(labeldata[0],'Person')
+                        if labeldata[0] == 'bicycle': # 忽略Dontcare类
+                            labeldata[0] = labeldata[0].replace(labeldata[0],'Bicycle')
+                        if labeldata[0] == 'road_sign': # 忽略Misc类
+                            labeldata[0] = labeldata[0].replace(labeldata[0],'Road_sign')
                         if labeldata[0] == '':
                             continue
                         else:
