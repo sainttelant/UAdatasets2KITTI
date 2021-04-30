@@ -60,7 +60,7 @@ class KITTIIngestor(Ingestor):
         return [self._get_image_detection(path, image_name, image_ext=image_ext) for image_name in image_ids]
 
     def find_image_ext(self, root, image_id):
-        for image_ext in ['png', 'jpg']:
+        for image_ext in ['png', 'jpg',"jpeg"]:
             if os.path.exists(f"{root}/training/image_2/{image_id}.{image_ext}"):
                 return image_ext
         raise Exception(f"could not find jpg or png for {image_id} at {root}/training/image_2")
@@ -89,9 +89,14 @@ class KITTIIngestor(Ingestor):
 
     def _get_detections(self, detections_fpath):
         detections = []
+        if os.path.exists(detections_fpath) == False:
+            with open(detections_fpath,"w+") as file:
+                print("create new txt file%s"%(detections_fpath))
+            file.close()
         with open(detections_fpath) as f:
             f_csv = csv.reader(f, delimiter=' ')
             for row in f_csv:
+                print("row:",row)
                 x1, y1, x2, y2 = map(float, row[4:8])
                 label = row[0]
                 detections.append({
@@ -113,17 +118,33 @@ DEFAULT_OCCLUDED = 0    # fully visible
 
 class KITTIEgestor(Egestor):
 
+    #Ô­°ækittiµÄ
     def expected_labels(self):
         return {
-            'Car': [],
-            'Cyclist': ['biker'],
+            'car': [],
+            'cyclist': ['biker'],
             'Misc': [],
-            'Pedestrian': ['person'],
+            'pedestrian': ['person'],
             'Person_sitting': [],
             'Tram': [],
             'Truck': [],
             'Van': [],
         }
+
+
+    """
+    def expected_labels(self):
+        return {
+            'car': [],
+            'cyclist': ['biker'],
+            'Misc': [],
+            'pedestrian': ['pedestrian'],
+            'Person_sitting': [],
+            'Tram': [],
+            'Truck': [],
+            'Van': [],
+        }
+    """
 
     def egest(self, *, image_detections, root):
         images_dir = f"{root}/training/image_2"

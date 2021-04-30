@@ -7,18 +7,41 @@ http://host.robots.ox.ac.uk/pascal/VOC/voc2012/htmldoc/index.html
 import os
 import shutil
 
+"""
+访问到根目录
+"""
+import sys
+sys.path.append("F:\\Kitti2voc")
+
+from GetImgName import *
 from converter import Ingestor, Egestor
 import xml.etree.ElementTree as ET
 
-
 class VOCIngestor(Ingestor):
     def validate(self, root):
+        self.n = 0
         path = f"{root}/VOC"
         for subdir in ["ImageSets", "JPEGImages", "Annotations"]:
             if not os.path.isdir(f"{path}/{subdir}"):
                 return False, f"Expected subdirectory {subdir} within {path}"
             if not os.path.isfile(f"{path}/ImageSets/Main/trainval.txt"):
+                #先校验一下 trainval.txt
                 return False, f"Expected main image set ImageSets/Main/trainval.txt to exist within {path}"
+            else:
+                if self.n == 0:
+                    os.remove(f"{path}/ImageSets/Main/trainval.txt")
+                    print("重新根据JPEGImages生成正确的trainval.txt")
+                    picpath = f"{path}/JPEGImages"
+                    k = aquireDetails(picpath)
+
+                    a = judgeFiles(picpath, k)
+                    print("a:",a)
+                    with open(f"{path}/ImageSets/Main/trainval.txt", "w+") as f:
+                        saveFileNameIntotxt(f, a)
+                    f.close()
+                    print("finish aquire jpeg files'names")
+                    self.n = self.n + 1
+
         return True, None
 
     def ingest(self, path):
@@ -90,7 +113,7 @@ class VOCEgestor(Egestor):
     def expected_labels(self):
         return {
             'aeroplane': [],
-            'bicycle': [],
+            'cyclist': [],
             'bird': [],
             'boat': [],
             'bottle': [],
@@ -103,7 +126,7 @@ class VOCEgestor(Egestor):
             'dog': [],
             'horse': [],
             'motorbike': [],
-            'person': ['pedestrian'],
+            'pedestrian': ['pedestrian'],
             'pottedplant': [],
             'sheep': [],
             'sofa': [],
@@ -153,19 +176,26 @@ class VOCEgestor(Egestor):
             })
 
             for detection in image_detection['detections']:
-                x_object = add_sub_node(xml_root, 'object', {
-                    'name': detection['label'],
-                    'difficult': 0,
-                    'occluded': 0,
-                    'truncated': 0,
-                    'pose': 'Unspecified'
-                })
-                add_sub_node(x_object, 'bndbox', {
-                    'xmin': detection['left'] + 1,
-                    'xmax': detection['right'] + 1,
-                    'ymin': detection['top'] + 1,
-                    'ymax': detection['bottom'] + 1
-                })
+
+                if detection["label"] == "car" and detection['left'] < 100 and detection['left'] > 50 and detection['right'] > 110 and detection["right"] < 190:
+
+                    print("this is left top wrong detection 20 as car!!,remove")
+                    continue
+                else:
+
+                    x_object = add_sub_node(xml_root, 'object', {
+                        'name': detection['label'],
+                        'difficult': 0,
+                        'occluded': 0,
+                        'truncated': 0,
+                        'pose': 'Unspecified'
+                    })
+                    add_sub_node(x_object, 'bndbox', {
+                        'xmin': detection['left'] + 1,
+                        'xmax': detection['right'] + 1,
+                        'ymin': detection['top'] + 1,
+                        'ymax': detection['bottom'] + 1
+                    })
 
             ET.ElementTree(xml_root).write(f"{annotations_path}/{image_id}.xml")
 
