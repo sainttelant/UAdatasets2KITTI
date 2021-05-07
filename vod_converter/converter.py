@@ -163,7 +163,8 @@ def validate_image_detections(image_detections):
         for detection in image_detection['detections']:
             if detection['right'] >= image['width'] or detection['bottom'] >= image['height']:
                 #raise ValueError(f"Image {image} has out of bounds bounding box {detection}")
-                print("Image %s has out of bounds bounding box "%(image["path"]))
+                pass
+                #print("Image %s has out of bounds bounding box "%(image["path"]))
             if detection['right'] <= detection['left'] or detection['bottom'] <= detection['top']:
                 raise ValueError(f"Image {image} has zero dimension bbox {detection}")
 

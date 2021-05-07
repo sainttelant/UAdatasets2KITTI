@@ -99,6 +99,7 @@ class KITTIIngestor(Ingestor):
                 print("row:",row)
                 x1, y1, x2, y2 = map(float, row[4:8])
                 label = row[0]
+                print("转成kitti的label:",label)
                 detections.append({
                     'label': label,
                     'left': x1,
@@ -121,10 +122,10 @@ class KITTIEgestor(Egestor):
     #原版kitti的
     def expected_labels(self):
         return {
-            'car': [],
-            'cyclist': ['biker'],
+            'Car': [],
+            'Bicycle': ['biker'],
             'Misc': [],
-            'pedestrian': ['person'],
+            'Person': ['person'],
             'Person_sitting': [],
             'Tram': [],
             'Truck': [],
@@ -170,6 +171,7 @@ class KITTIEgestor(Egestor):
                 for detection in image_detection['detections']:
                     kitti_row = [-1] * 15
                     kitti_row[0] = detection['label']
+                    #print("转成kitti的label:",detection['label'])
                     kitti_row[1] = DEFAULT_TRUNCATED
                     kitti_row[2] = DEFAULT_OCCLUDED
                     x1 = detection['left']
