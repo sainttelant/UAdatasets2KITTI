@@ -4,6 +4,7 @@ import string
 import os
 
 txt_list = glob.glob('KITTIDATA/training/label_2/*.txt') # 存储Labels文件夹所有txt文件路径
+images_list = glob.glob("KITTIDATA/training/image_2/*.jpg")
 def show_category(txt_list):
     print("show_category!!")
     category_list= []
@@ -36,9 +37,9 @@ def merge(line):
 
 
 if __name__ == "__main__":
-    print("想要去除txt的空格输入1，想要删除空的txt文件输入2")
-    print("想要去除txt的空格输入1，想要删除空的txt文件输入2")
-    print("想要去除txt的空格输入1，想要删除空的txt文件输入2")
+    print("想要去除txt的空格输入1，想要删除空的txt文件输入2,删除对应的图片输入3")
+    print("想要去除txt的空格输入1，想要删除空的txt文件输入2,删除对应的图片输入3")
+    print("想要去除txt的空格输入1，想要删除空的txt文件输入2,删除对应的图片输入3")
     choose = input("输入你要做的动作：")
     if choose == "1":
         print('before modify categories are:\n')
@@ -76,7 +77,7 @@ if __name__ == "__main__":
 
         print('\nafter modify categories are:\n')
         show_category(txt_list)
-    else:
+    elif choose == "2":
         with open ("emptyfile.txt", "w+") as file:
             for item in txt_list:
                 size = os.path.getsize(item)
@@ -86,6 +87,16 @@ if __name__ == "__main__":
                     file.write(xieru+"\n")
                     os.remove(item)
         file.close()
-
+    elif choose == "3":
+        print("删除对应的图片")
+        with open("emptyfile.txt") as file1:
+            lines = file1.readlines()
+            for line in lines:
+                info = line.split('/')[1].split('.')[0]
+                imagedetail = os.path.join("KITTIDATA/training/image_2",info+'.jpg')
+                print("去掉对应的图片:",imagedetail)
+                os.remove(imagedetail)
+                
+                
 
 
