@@ -95,8 +95,8 @@ def ConvertVOCXml(file_path="", file_name=""):
                             #从xml文件里读取车辆type
                             vehicle_type = target_child.attrib["vehicle_type"]
                             #speed_value = target_child.attrib["speed"]
-
-                            name.appendChild(doc.createTextNode(vehicle_type))
+                            name.appendChild(doc.createTextNode("car"))
+                            #name.appendChild(doc.createTextNode(vehicle_type))
                             #speed.appendChild(doc.createTextNode(str(speed_value)))  # 随意指定
                             pose.appendChild(doc.createTextNode("left"))
                             truncated.appendChild(doc.createTextNode("0"))  # 随意指定
