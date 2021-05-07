@@ -163,11 +163,11 @@ def validate_image_detections(image_detections):
         for detection in image_detection['detections']:
             if detection['right'] >= image['width'] or detection['bottom'] >= image['height']:
                 #raise ValueError(f"Image {image} has out of bounds bounding box {detection}")
-                pass
-                #print("Image %s has out of bounds bounding box "%(image["path"]))
+                
+                print("Image %s has out of bounds bounding box "%(image["path"]))
             if detection['right'] <= detection['left'] or detection['bottom'] <= detection['top']:
-                raise ValueError(f"Image {image} has zero dimension bbox {detection}")
-
+                #raise ValueError(f"Image {image} has zero dimension bbox {detection}")
+                print("Image %s has zero dimension bbox "%(image["path"]))
 
 def convert_labels(*, image_detections, expected_labels,
                    select_only_known_labels, filter_images_without_labels):

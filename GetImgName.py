@@ -53,7 +53,10 @@ def generatefilelist(path, allthing):
             """
             tailname = abspath.split(".")[1]
             # \\代表单斜杠匹配
-            prename = abspath.split(".")[0].split("\\")[1]
+            print("tailname:",tailname)
+            #prename = abspath.split(".")[0].split("\\")[1]
+            prename = abspath.split(".")[0].split("/")[1]
+            print("prename:",prename)
             hang = "file"+"\t"+"'"+prename+"."+tailname+"'"
             filenames.append(hang)
     return filenames

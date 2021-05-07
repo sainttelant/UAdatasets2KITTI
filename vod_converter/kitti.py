@@ -179,6 +179,13 @@ class KITTIEgestor(Egestor):
                     y1 = detection['top']
                     y2 = detection['bottom']
                     kitti_row[4:8] = x1, y1, x2, y2
+                    kitti_row[8] = "0.00"
+                    kitti_row[9] = "0.00"
+                    kitti_row[10] = "0.00"
+                    kitti_row[11] = "0.00"
+                    kitti_row[12] = "0.00"
+                    kitti_row[13] = "0.00"
+                    kitti_row[14] = "0.00"
                     csvwriter.writerow(kitti_row)
 
 
