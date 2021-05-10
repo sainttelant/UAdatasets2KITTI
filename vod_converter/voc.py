@@ -182,9 +182,9 @@ class VOCEgestor(Egestor):
                     print("this is left top wrong detection 20 as car!!,remove")
                     continue
 
-                if detection["label"] == "Person" and detection['left'] < 2270 and detection['left']>2255 \
+                if detection["label"] == "Person" and detection['left'] < 853 and detection['left']>848 \
                 and detection['right'] \
-                > 2280 and detection['right'] < 2300:
+                > 858 and detection['right'] < 863:
                     continue
                 else:
                     
