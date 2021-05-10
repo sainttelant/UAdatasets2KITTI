@@ -1,2 +1,0 @@
-python3 vod_converter/main.py --from voc --from-path VOCDATA --to kitti --to-path KITTIDATA
-python3 vod_converter/main.py --from kitti --from-path KITTIDATA --to voc --to-path VOCDATA
