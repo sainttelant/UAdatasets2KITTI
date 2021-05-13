@@ -14,10 +14,12 @@ python vod_converter/main.py --from voc --from-path VOCDATA --to kitti --to-path
 
 第二步: 在record目录下,运行 ffmpeg -f concat -i filelist.txt -c copy out.mp4,生成一个out.mp4文件
 
-第三步: 把out.mp4切成图片,后面日期可以变化
-ffmpeg -i out.mp4 -r 1 20210508%7d.jpg 
+第三步: 把out.mp4切成图片,后面日期记得要改一下！！！！！！
+！！！！！！！！！！！！！
+！！！！！！！！！！！！！可以变化
+ffmpeg -i out.mp4 -r 1 20210513%7d.jpg 
 
-第四步: 将all images 拷贝到另一个工程Zhangw/data/images
+第四步: 将all images 拷贝到另一个工程Zhangw/yolov5-5.0/data/images
 运行python3 resizepic.py 将图片统一成960*544
 运行python3 detect.py,生成label文件
 再运行convert2kitti,生成kitti格式label
