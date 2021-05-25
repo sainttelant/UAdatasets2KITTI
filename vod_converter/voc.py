@@ -117,7 +117,7 @@ class VOCEgestor(Egestor):
             'bird': [],
             'boat': [],
             'bottle': [],
-            'bus': [],
+            'Bus': [],
             'Car': [],
             'cat': [],
             'chair': [],
@@ -131,6 +131,7 @@ class VOCEgestor(Egestor):
             'sheep': [],
             'sofa': [],
             'train': [],
+            'Truck':[],
             'tvmonitor': []
         }
 

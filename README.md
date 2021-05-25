@@ -17,7 +17,7 @@ python vod_converter/main.py --from voc --from-path VOCDATA --to kitti --to-path
 第三步: 把out.mp4切成图片,后面日期记得要改一下！！！！！！
 ！！！！！！！！！！！！！
 ！！！！！！！！！！！！！可以变化
-ffmpeg -i out.mp4 -r 1 20210513%7d.jpg 
+ffmpeg -i out.mp4 -r 1 20210524%7d.jpg 
 
 第四步: 将all images 拷贝到另一个工程Zhangw/yolov5-5.0/data/images
 运行python3 resizepic.py 将图片统一成960*544

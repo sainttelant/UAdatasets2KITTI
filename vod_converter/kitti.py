@@ -129,6 +129,7 @@ class KITTIEgestor(Egestor):
             'Person_sitting': [],
             'Tram': [],
             'Truck': [],
+            'Bus':[],
             'Van': [],
         }
 

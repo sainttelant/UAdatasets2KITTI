@@ -51,8 +51,12 @@ if __name__ == "__main__":
                 with open(item, 'r') as r_tdf:
                     for each_line in r_tdf:
                         labeldata = each_line.strip().split(' ')
-                        if labeldata[0] in ['car','truck','bus']: # 合并汽车类
+                        if labeldata[0] == 'car':
                             labeldata[0] = labeldata[0].replace(labeldata[0],'Car')
+                        if labeldata[0] == "bus":
+                            labeldata[0]= labeldata[0].replace(labeldata[0],"Bus")
+                        if labeldata[0] == "truck":
+                            labeldata[0]= labeldata[0].replace(labeldata[0],"Truck")
                         if labeldata[0] == 'person' or labeldata[0]== "pedestrian" or labeldata[0]=="Pedestrian": # 合并行人类
                             labeldata[0] = labeldata[0].replace(labeldata[0],'Person')
                         if labeldata[0] == 'bicycle' or labeldata[0] == "cyclist" or labeldata[0] == "Cyclist" or  \
